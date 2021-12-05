@@ -81,8 +81,9 @@
 
 .card__submit-button{
   width: 20%;
-  margin-left:30px;
-  font-size: clamp(0.475rem, 2.5vw, 0.85rem);
+  margin-left:20px;
+  margin-bottom:5px;
+  font-size: clamp(0.725rem, 2.5vw, 0.9rem);
   background-color: #b8acac;
   border-radius: 5px;
   padding:0.55rem;
