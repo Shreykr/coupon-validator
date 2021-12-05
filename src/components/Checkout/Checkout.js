@@ -59,6 +59,8 @@ function Checkout() {
     setCartValue(
       (cartValue = Math.floor(Math.random() * (5000 - 50 + 1)) + 50)
     );
+    setButtonState((buttonState = false));
+    setVisibilityState((visibilityState = false));
   };
 
   let executeFunctions = (coupon) => {
