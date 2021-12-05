@@ -528,7 +528,7 @@ function Coupon() {
                 name='couponStartDate'
                 id='start-date'
                 className='form-container__input'
-                onBlur={validate}
+                onChange={validate}
               />
             </div>
             <div className='form-container__form__group'>
@@ -545,7 +545,7 @@ function Coupon() {
                   color: !expiryState ? "#857D7D" : "#000000",
                 }}
                 className='form-container__input'
-                onBlur={validate}
+                onChange={validate}
               />
             </div>
             <button

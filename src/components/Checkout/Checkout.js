@@ -126,7 +126,7 @@ function Checkout() {
     setVisibilityState(true);
     toast.success(`Valid Coupon - Discount applied`, {
       position: "bottom-center",
-      autoClose: 4000,
+      autoClose: 6000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
