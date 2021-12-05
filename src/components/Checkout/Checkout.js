@@ -228,17 +228,18 @@ function Checkout() {
                   </button>
                 </div>
               </div>
-              <button
-                title='List Coupons'
-                type='button'
-                className='card__group-button'
-                style={{ marginBottom: "25px" }}
-                onClick={resetCartValue}>
-                Reset
-              </button>
             </form>
           </div>
           <p className='card__value'>₹{cartValue}/-</p>
+
+          <button
+            title='Reset'
+            type='button'
+            className='card__button'
+            style={{ marginBottom: "10px" }}
+            onClick={resetCartValue}>
+            Reset
+          </button>
 
           <button
             title='List Coupons'
@@ -255,6 +256,7 @@ function Checkout() {
             style={{ textDecoration: "none", color: "black" }}>
             <div>Create Coupon</div>
           </Link>
+
           <div
             className='card__discount-value'
             style={{ display: visibilityState ? "inline" : "none" }}>
