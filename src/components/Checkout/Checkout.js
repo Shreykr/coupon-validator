@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -40,27 +40,40 @@ function Checkout() {
       });
   }, []);
 
-  let [cartValue, setCartValue] = useState(
-    Math.floor(Math.random() * (5000 - 50 + 1)) + 50
-  );
+  let [cartValue, setCartValue] = useState(0);
   let [coupon, setCoupon] = useState(null);
   let [status, setStatus] = useState(false);
   let [navState, setNavOpen] = useState("");
   let [buttonState, setButtonState] = useState(false);
   let [discountValue, setDiscountValue] = useState(0);
   let [visibilityState, setVisibilityState] = useState(false);
+  let [fieldState, setFieldState] = useState(false);
+  let [cartInputState, setCartInputState] = useState();
+
+  let [formErrors, setFormErrors] = useState({
+    cartValueError: "",
+  });
+
+  let [fieldValidity, setFieldValidity] = useState({
+    cartValue: false,
+  });
+
+  let [formValid, setFormValid] = useState(false);
+
+  let cartInput = useRef(null);
 
   let navToggle = () => {
     setStatus((status = !status));
     status ? setNavOpen((navState = "nav--open")) : setNavOpen((navState = ""));
   };
 
-  let updateCartValue = () => {
-    setCartValue(
-      (cartValue = Math.floor(Math.random() * (5000 - 50 + 1)) + 50)
-    );
+  let resetCartValue = (e) => {
+    e.preventDefault();
+    setCartValue(0);
+    setFieldState(false);
     setButtonState((buttonState = false));
     setVisibilityState((visibilityState = false));
+    cartInput.current.value = 0;
   };
 
   let executeFunctions = (coupon) => {
@@ -109,6 +122,7 @@ function Checkout() {
       }
     }
     setButtonState(true);
+    setFieldState(true);
     setVisibilityState(true);
     toast.success(`Valid Coupon - Discount applied`, {
       position: "bottom-center",
@@ -119,6 +133,19 @@ function Checkout() {
       draggable: true,
       progress: undefined,
     });
+  };
+
+  let updateCartValue = (e) => {
+    if (cartInput.current.value < 50 || cartInput.current.value > 5000) {
+      setCartValue(0);
+    } else {
+      e.preventDefault();
+      if (cartInput.current.value === "") {
+        setCartValue(0);
+      } else {
+        setCartValue(Number(cartInput.current.value));
+      }
+    }
   };
 
   let couponValue = (coupon) => {
@@ -172,25 +199,55 @@ function Checkout() {
       </nav>
       <section className='card'>
         <div className='card__body'>
-          <h2 className='card__text'>Cart value</h2>
-          <p className='card__value'>₹{cartValue}/-</p>
-          <div className='card__button-group'>
-            <button
-              title='List Coupons'
-              className='card__group-button'
-              style={{ marginBottom: "10px" }}
-              onClick={updateCartValue}>
-              Update Cart
-            </button>
-            <button
-              title='List Coupons'
-              className='card__group-button'
-              style={{ marginBottom: "10px" }}
-              onClick={navToggle}
-              disabled={buttonState}>
-              List Coupons
-            </button>
+          <div className='form-container-1'>
+            <form className='form-container__form-1'>
+              <div className='form-group'>
+                <label className='card__text' htmlFor='cart-value'>
+                  Cart value
+                </label>
+                <div className='card__input-group'>
+                  <input
+                    type='number'
+                    id='cart-value'
+                    className='form-control'
+                    disabled={fieldState}
+                    style={{
+                      backgroundColor: fieldState ? "#B8ACAC" : "#F5F3F3",
+                      color: fieldState ? "#857D7D" : "#000000",
+                    }}
+                    min='50'
+                    max='5000'
+                    ref={cartInput}
+                  />
+                  <button
+                    type='submit'
+                    className='card__submit-button'
+                    onClick={(e) => updateCartValue(e)}
+                    disabled={buttonState}>
+                    Apply
+                  </button>
+                </div>
+              </div>
+              <button
+                title='List Coupons'
+                type='button'
+                className='card__group-button'
+                style={{ marginBottom: "25px" }}
+                onClick={resetCartValue}>
+                Reset
+              </button>
+            </form>
           </div>
+          <p className='card__value'>₹{cartValue}/-</p>
+
+          <button
+            title='List Coupons'
+            className='card__button'
+            style={{ marginBottom: "10px" }}
+            onClick={navToggle}
+            disabled={buttonState}>
+            List Coupons
+          </button>
 
           <Link
             to='../create-coupon'
@@ -201,7 +258,7 @@ function Checkout() {
           <div
             className='card__discount-value'
             style={{ display: visibilityState ? "inline" : "none" }}>
-            Item Discount &nbsp; -₹{discountValue}/-
+            Discount Value &nbsp; -₹{discountValue}/-
           </div>
         </div>
       </section>

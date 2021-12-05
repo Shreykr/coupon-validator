@@ -16,7 +16,7 @@
 
 .card__text{
   align-self: center;
-  font-size: clamp(1.35rem, 3.5vw, 1.7rem);
+  font-size: clamp(1.25rem, 3.5vw, 1.5rem);
 }
 
 .card__value{
@@ -49,9 +49,9 @@
 .card__group-button{
   width: 40%;
   align-self: center;
-  margin-top:clamp(20px, 3.5vw,30px);
+  margin-top:clamp(5px, 3.5vw,10px);
   margin-bottom:clamp(20px, 3.5vw,30px);
-  font-size: clamp(0.975rem, 2.5vw, 1.3rem);
+  font-size: clamp(0.775rem, 2.5vw, 1.3rem);
   background-color: #b8acac;
   border-radius: 5px;
   padding:0.55rem;
@@ -69,6 +69,30 @@
   box-shadow: 0px 4px 10px 0px rgba(29, 0, 10, 0.2),
     0px 2px 3px 0px rgba(29, 0, 10, 0.2);
     cursor: pointer
+}
+
+.card__input-group{
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  align-content: center;
+  justify-content:center;
+}
+
+.card__submit-button{
+  width: 20%;
+  margin-left:30px;
+  font-size: clamp(0.475rem, 2.5vw, 0.85rem);
+  background-color: #b8acac;
+  border-radius: 5px;
+  padding:0.55rem;
+  border:0px solid;
+}
+
+.card__submit-button:hover{
+  box-shadow: 0px 4px 10px 0px rgba(29, 0, 10, 0.2),
+  0px 2px 3px 0px rgba(29, 0, 10, 0.2);
+  cursor: pointer
 }
 
 .card__discount-value{
@@ -189,6 +213,30 @@
 .nav__button:hover{
   box-shadow: 0px 4px 10px 0px rgba(29, 0, 10, 0.2),
     0px 2px 3px 0px rgba(29, 0, 10, 0.2);
+}
+.form-container-1{
+  width: 100%;
+}
+.form-container__form-1{
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
+
+.form-control{
+  background-color: #f5f3f3;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  border-radius: 0.25rem;
+  padding: 8.5px;
+  border: 1px solid black;
+  width:70%;
+  font-size: clamp(0.85rem, 2vw, 0.95rem);
+}
+
+.form-control:focus{
+  outline: none;
 }
 
 @media screen and (max-width: 768px) {
