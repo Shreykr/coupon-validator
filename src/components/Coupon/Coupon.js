@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./coupon.css";
@@ -35,8 +36,9 @@ function Coupon() {
   let [maxDiscount, setMaxDiscount] = useState(0);
 
   let [buttonState, setButtonState] = useState(false);
-  let [fieldState, setFieldState] = useState(false);
+  let [fieldState, setFieldState] = useState(true);
   let [cartValueState, setCartValueState] = useState(false);
+  let [expiryState, setExpiryState] = useState(false);
 
   let updateAndValidate = (event) => {
     validate(event);
@@ -55,7 +57,7 @@ function Coupon() {
     let formError = formErrors;
     let fieldValidate = fieldValidity;
     if (event.target.name === "couponCode") {
-      if (fieldValue.length <= 0) {
+      if (fieldValue.length <= 0 || fieldValue.length === undefined) {
         formError.couponCodeError = "Code cannot be empty";
         fieldValidate.couponCode = false;
       } else if (fieldValue.length > 9) {
@@ -98,7 +100,7 @@ function Coupon() {
           fieldValidate.couponType = false;
           setCouponValue((couponValue = 0));
         }
-      } else if (couponType === "Fixed Discount") {
+      } else if (couponType === "Flat Discount") {
         if (couponValue > 0) {
           fieldValidate.maxDiscount = true;
           setMaxDiscount((maxDiscount = couponValue));
@@ -115,12 +117,18 @@ function Coupon() {
           progress: undefined,
         });
       }
+      if (
+        couponType === "Percentage Discount" ||
+        couponType === "Flat Discount"
+      ) {
+        updateCartValueField();
+      }
     } else if (event.target.name === "couponValue") {
-      if (fieldValue <= 0) {
-        formError.couponValueError = "Must enter a valid value";
-        fieldValidate.couponValue = false;
-      } else if (couponType === "") {
+      if (couponType === "") {
         formError.couponValueError = "Must select a coupon type";
+        fieldValidate.couponValue = false;
+      } else if (fieldValue <= 0) {
+        formError.couponValueError = "Must enter a valid value";
         fieldValidate.couponValue = false;
       } else if (couponType === "Percentage Discount") {
         if (fieldValue > 100) {
@@ -155,7 +163,9 @@ function Coupon() {
           progress: undefined,
         });
       }
-      updateCartValueField();
+      if (couponType === "Flat Discount") {
+        updateCartValueField();
+      }
     } else if (event.target.name === "minCartValue") {
       if (fieldValue <= 0) {
         formError.minCartValueError = "Valid value required";
@@ -163,11 +173,14 @@ function Coupon() {
       } else if (couponValue === 0) {
         formError.minCartValueError = "Coupon value required";
         fieldValidate.minCartValue = false;
-      } else if (fieldValue < maxDiscount) {
+      } else if (fieldValue < couponValue && couponType === "Flat Discount") {
         formError.minCartValueError = "Value must be greater than coupon value";
         fieldValidate.minCartValue = false;
       } else if (fieldValue > 5000) {
         formError.minCartValueError = "Min.Cart Value cannot exceed 5000";
+        fieldValidate.minCartValue = false;
+      } else if (fieldValue < 50) {
+        formError.minCartValueError = "Min.Cart Value must be more than 50";
         fieldValidate.minCartValue = false;
       } else {
         formError.minCartValueError = "";
@@ -239,6 +252,7 @@ function Coupon() {
           progress: undefined,
         });
       }
+      updateExpiryState();
     } else if (event.target.name === "couponExpiryDate") {
       if (fieldValue.length <= 0) {
         formError.couponExpiryDateError = "Must select an expiry date";
@@ -285,8 +299,25 @@ function Coupon() {
       formValidity.couponStartDate &&
       formValidity.couponExpiryDate
     ) {
-      setFormValid((formValid = true));
-      updateButtonState();
+      if (couponStartDate >= couponExpiryDate) {
+        formValidity.couponExpiryDate = false;
+        setFormValid((formValid = false));
+        updateButtonState();
+        formErrors.couponExpiryDateError =
+          "Expiry Date must be after start date";
+        toast.error(formErrors.couponExpiryDateError, {
+          position: "bottom-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } else {
+        setFormValid((formValid = true));
+        updateButtonState();
+      }
     } else {
       setFormValid((formValid = false));
       updateButtonState();
@@ -310,10 +341,22 @@ function Coupon() {
   };
 
   let updateCartValueField = () => {
-    if (couponValue > 0 && fieldValidity.couponValue) {
+    if (
+      couponValue > 0 &&
+      fieldValidity.couponValue &&
+      couponType === "Flat Discount"
+    ) {
+      setCartValueState((cartValueState = true));
+    } else if (couponType === "Percentage Discount") {
       setCartValueState((cartValueState = true));
     } else {
       setCartValueState((cartValueState = false));
+    }
+  };
+
+  let updateExpiryState = () => {
+    if (fieldValidity.couponStartDate) {
+      setExpiryState((expiryState = true));
     }
   };
 
@@ -376,6 +419,9 @@ function Coupon() {
       <section className='coupon-form-container'>
         <div className='form-container'>
           <form className='form-container__form'>
+            <div className='form-header'>
+              <h1>Create Coupon</h1>
+            </div>
             <div className='form-container__form__group'>
               <label className='form-container__label' htmlFor='coupon-code'>
                 Coupon Code
@@ -390,24 +436,35 @@ function Coupon() {
               />
             </div>
             <div className='form-container__form__group'>
-              <input
-                type='radio'
-                name='couponType'
-                defaultValue='Flat Discount'
-                id='coupon-type'
-                className='form-container__input'
-                onChange={updateAndValidate}
-              />
-              Flat Discount
-              <input
-                type='radio'
-                name='couponType'
-                defaultValue='Percentage Discount'
-                id='coupon-type'
-                className='form-container__input'
-                onChange={updateAndValidate}
-              />
-              Percentage Discount
+              <div className='form-container__group__coupon-type'>
+                <p className='form-container__label-p'>Coupon Type</p>
+                <div>
+                  <input
+                    type='radio'
+                    name='couponType'
+                    defaultValue='Flat Discount'
+                    id='coupon-type'
+                    className='form-container__input-radio'
+                    onChange={updateAndValidate}
+                  />
+                  <span className='form-container__radio-value'>
+                    Flat Discount
+                  </span>
+                </div>
+                <div>
+                  <input
+                    type='radio'
+                    name='couponType'
+                    defaultValue='Percentage Discount'
+                    className='form-container__input-radio'
+                    style={{ marginBottom: "17.5px" }}
+                    onChange={updateAndValidate}
+                  />
+                  <span className='form-container__radio-value'>
+                    Percentage Discount
+                  </span>
+                </div>
+              </div>
             </div>
             <div className='form-container__form__group'>
               <label className='form-container__label' htmlFor='coupon-value'>
@@ -419,23 +476,7 @@ function Coupon() {
                 placeholder='Enter Coupon Value'
                 id='coupon-value'
                 className='form-container__input'
-                onBlur={validate}
-              />
-            </div>
-            <div className='form-container__form__group'>
-              <label
-                className='form-container__label'
-                htmlFor='min-cart-amount'>
-                Minimum Cart Amount
-              </label>
-              <input
-                type='number'
-                name='minCartValue'
-                placeholder='Enter min.cart amount'
-                id='min-cart-amount'
-                disabled={!cartValueState}
-                className='form-container__input'
-                onBlur={validate}
+                onChange={validate}
               />
             </div>
             <div className='form-container__form__group'>
@@ -451,6 +492,30 @@ function Coupon() {
                 className='form-container__input'
                 defaultValue={maxDiscount}
                 disabled={fieldState}
+                style={{
+                  backgroundColor: fieldState ? "#B8ACAC" : "#F5F3F3",
+                  color: fieldState ? "#857D7D" : "#000000",
+                }}
+                onBlur={validate}
+              />
+            </div>
+            <div className='form-container__form__group'>
+              <label
+                className='form-container__label'
+                htmlFor='min-cart-amount'>
+                Minimum Cart Amount
+              </label>
+              <input
+                type='number'
+                name='minCartValue'
+                id='min-cart-amount'
+                defaultValue={minCartValue}
+                disabled={!cartValueState}
+                style={{
+                  backgroundColor: !cartValueState ? "#B8ACAC" : "#F5F3F3",
+                  color: !cartValueState ? "#857D7D" : "#000000",
+                }}
+                className='form-container__input'
                 onBlur={validate}
               />
             </div>
@@ -474,18 +539,29 @@ function Coupon() {
                 type='datetime-local'
                 name='couponExpiryDate'
                 id='expiry-date'
+                disabled={!expiryState}
+                style={{
+                  backgroundColor: !expiryState ? "#B8ACAC" : "#F5F3F3",
+                  color: !expiryState ? "#857D7D" : "#000000",
+                }}
                 className='form-container__input'
                 onBlur={validate}
               />
             </div>
             <button
-              title='Submit Button'
+              title='Create Button'
               type='button'
               className='form-container__button'
               disabled={!buttonState}
               onClick={handleSubmit}>
-              Submit
+              Create
             </button>
+            <Link
+              to='../checkout'
+              className='form-container__button'
+              style={{ textDecoration: "none", color: "black" }}>
+              <div>Go Back</div>
+            </Link>
           </form>
         </div>
       </section>

@@ -55,6 +55,12 @@ function Checkout() {
     status ? setNavOpen((navState = "nav--open")) : setNavOpen((navState = ""));
   };
 
+  let updateCartValue = () => {
+    setCartValue(
+      (cartValue = Math.floor(Math.random() * (5000 - 50 + 1)) + 50)
+    );
+  };
+
   let executeFunctions = (coupon) => {
     navToggle();
     validateCoupon(coupon);
@@ -166,16 +172,26 @@ function Checkout() {
         <div className='card__body'>
           <h2 className='card__text'>Cart value</h2>
           <p className='card__value'>₹{cartValue}/-</p>
-          <button
-            title='List Coupons'
-            className='card__button'
-            style={{ marginBottom: "10px" }}
-            onClick={navToggle}
-            disabled={buttonState}>
-            List Coupons
-          </button>
+          <div className='card__button-group'>
+            <button
+              title='List Coupons'
+              className='card__group-button'
+              style={{ marginBottom: "10px" }}
+              onClick={updateCartValue}>
+              Update Cart
+            </button>
+            <button
+              title='List Coupons'
+              className='card__group-button'
+              style={{ marginBottom: "10px" }}
+              onClick={navToggle}
+              disabled={buttonState}>
+              List Coupons
+            </button>
+          </div>
+
           <Link
-            to='create-coupon'
+            to='../create-coupon'
             className='card__button'
             style={{ textDecoration: "none", color: "black" }}>
             <div>Create Coupon</div>
