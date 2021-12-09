@@ -203,9 +203,6 @@ function Coupon() {
       if (fieldValue <= 0) {
         formError.maxDiscountError = "Must enter a valid value";
         fieldValidate.maxDiscount = false;
-      } else if (fieldValue <= 0) {
-        formError.maxDiscountError = "Enter a valid value";
-        fieldValidate.maxDiscount = false;
       } else if (couponType === "") {
         formError.maxDiscountError = "Must select a coupon type";
         fieldValidate.maxDiscount = false;
@@ -496,7 +493,7 @@ function Coupon() {
                   backgroundColor: fieldState ? "#B8ACAC" : "#F5F3F3",
                   color: fieldState ? "#857D7D" : "#000000",
                 }}
-                onBlur={validate}
+                onChange={validate}
               />
             </div>
             <div className='form-container__form__group'>

@@ -1,0 +1,46 @@
+.card__body {
+  display: flex;
+  flex-flow: column nowrap;
+  height: fit-content;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  background-color: #e9dfdf;
+  box-shadow: 0px 4px 10px 0px rgba(29, 0, 10, 0.2),
+    0px 2px 3px 0px rgba(29, 0, 10, 0.2);
+}
+
+.card__text{
+  align-self: center;
+  font-size: clamp(1.25rem, 3.5vw, 1.5rem);
+}
+
+.card__value{
+  margin-top:10px;
+  align-self: center;
+  font-size: clamp(1.35rem, 3.5vw, 1.9rem);
+  font-weight: bold;
+}
+
+.card__discount-value{
+  align-self: center;
+  margin-bottom: 20px;
+  color: green;
+}
+
+.card__discount-value--visible{
+  display:inline;
+}
+
+.card__discount-value--invisible{
+  display: none;
+}
+
+.form-container-1{
+  width: 100%;
+}
+.form-container__form-1{
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}

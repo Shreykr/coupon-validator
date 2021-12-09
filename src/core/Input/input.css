@@ -1,0 +1,32 @@
+.card__input-group{
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    align-content: center;
+    justify-content:center;
+}
+
+.form-control{
+    background-color: #f5f3f3;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    border-radius: 0.25rem;
+    padding: 8.5px;
+    border: 1px solid black;
+    width:70%;
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
+  }
+  
+  .form-control--enable{
+    background-color: #F5F3F3;
+    color: #000000;
+  }
+  
+  .form-control--disable{
+    background-color: #B8ACAC;
+    color: #857D7D;
+  }
+  
+  .form-control:focus{
+    outline: none;
+  }
