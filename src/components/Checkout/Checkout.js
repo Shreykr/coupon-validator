@@ -32,7 +32,7 @@ function Checkout() {
     setFieldState(false);
     setButtonState((buttonState = false));
     setVisibilityState((visibilityState = false));
-    cartInput.current.value = 0;
+    cartInput.current.value = "";
   };
 
   let executeFunctions = (coupon) => {

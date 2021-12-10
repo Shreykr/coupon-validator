@@ -24,6 +24,7 @@ const Card = React.forwardRef((props, ref) => {
                     ? "form-control--disable"
                     : "form-control--enable")
                 }
+                placeholder='Enter cart value'
                 disabled={props.fieldState}
                 min='50'
                 max='5000'
