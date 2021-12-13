@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./coupon.css";
-import axios from "axios";
+
+import {Forms} from './Form/Form'
+
+import { couponService } from "../../services/http/Coupon";
+
 
 function Coupon() {
   let [formErrors, setFormErrors] = useState({
@@ -360,7 +364,7 @@ function Coupon() {
   let handleSubmit = (event) => {
     event.preventDefault();
     if (formValid) {
-      var formJson = {
+      let data = {
         couponCode: couponCode,
         couponType: couponType,
         couponValue: couponValue,
@@ -369,52 +373,14 @@ function Coupon() {
         couponStartDate: couponStartDate,
         couponExpiryDate: couponExpiryDate,
       };
-      axios
-        .post(
-          "https://coupon-validator-backend.herokuapp.com/api/v1/coupon/add-coupon",
-          formJson
-        )
-        .then(function (response) {
-          if (response.data.status === 200) {
-            toast.success("Coupon Created 😄", {
-              position: "bottom-center",
-              autoClose: 4000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
-          } else if (response.data.status === 400) {
-            toast.error("Failed to create coupon 😥", {
-              position: "bottom-center",
-              autoClose: 4000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
-          }
-        })
-        .catch(function (error) {
-          toast.error("Some Error Occurred 😥", {
-            position: "bottom-center",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        });
+      couponService('add-coupon',undefined,data)
     }
   };
 
   return (
     <>
       <section className='coupon-form-container'>
-        <div className='form-container'>
+        {/* <div className='form-container'>
           <form className='form-container__form'>
             <div className='form-header'>
               <h1>Create Coupon</h1>
@@ -560,7 +526,8 @@ function Coupon() {
               <div>Go Back</div>
             </Link>
           </form>
-        </div>
+        </div> */}
+        <Forms />
       </section>
 
       <ToastContainer

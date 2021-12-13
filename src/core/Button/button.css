@@ -1,71 +1,72 @@
 .card__button{
-    width: 50%;
-    align-self: center;
-    margin-top:clamp(20px, 3.5vw,30px);
-    margin-bottom:clamp(20px, 3.5vw,30px);
-    font-size: clamp(0.975rem, 2.5vw, 1.3rem);
-    background-color: #b8acac;
-    border-radius: 5px;
-    padding:0.55rem;
-    border:0px solid; 
-    text-align: center;
-    text-decoration: none;
-    color:black;
-  }
+  width: 50%;
+  align-self: center;
+  margin-top:clamp(20px, 3.5vw,30px);
+  margin-bottom:clamp(20px, 3.5vw,30px);
+  font-size: clamp(0.975rem, 2.5vw, 1.3rem);
+  background-color: #b8acac;
+  border-radius: 5px;
+  padding:0.55rem;
+  border:0px solid; 
+  text-align: center;
+  text-decoration: none;
+  color:black;
+}
   
-  .card__button--margin{
-    margin-bottom:10px;
-  }
+.card__button--margin{
+  margin-bottom:10px;
+}
   
-  .card__button-group{
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
-  }
+.card__button-group{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
   
-  .card__group-button{
-    width: 40%;
-    align-self: center;
-    margin-top:clamp(5px, 3.5vw,10px);
-    margin-bottom:clamp(20px, 3.5vw,30px);
-    font-size: clamp(0.775rem, 2.5vw, 1.3rem);
-    background-color: #b8acac;
-    border-radius: 5px;
-    padding:0.55rem;
-    border:0px solid; 
-    text-align: center;
-  }
+.card__group-button{
+  width: 40%;
+  align-self: center;
+  margin-top:clamp(5px, 3.5vw,10px);
+  margin-bottom:clamp(20px, 3.5vw,30px);
+  font-size: clamp(0.775rem, 2.5vw, 1.3rem);
+  background-color: #b8acac;
+  border-radius: 5px;
+  padding:0.55rem;
+  border:0px solid; 
+  text-align: center;
+}
   
-  .card__group-button:hover{
-    box-shadow: 0px 4px 10px 0px rgba(29, 0, 10, 0.2),
-      0px 2px 3px 0px rgba(29, 0, 10, 0.2);
-      cursor: pointer
-  }
-  
-  .card__button:hover{
-    box-shadow: 0px 4px 10px 0px rgba(29, 0, 10, 0.2),
-      0px 2px 3px 0px rgba(29, 0, 10, 0.2);
-      cursor: pointer
-  }
-  .card__submit-button{
-    width: 20%;
-    margin-left:20px;
-    margin-bottom:5px;
-    font-size: clamp(0.725rem, 2.5vw, 0.9rem);
-    background-color: #b8acac;
-    border-radius: 5px;
-    padding:0.55rem;
-    border:0px solid;
-  }
-  .card__submit-button:hover{
-    box-shadow: 0px 4px 10px 0px rgba(29, 0, 10, 0.2),
+.card__group-button:hover{
+  box-shadow: 0px 4px 10px 0px rgba(29, 0, 10, 0.2),
     0px 2px 3px 0px rgba(29, 0, 10, 0.2);
     cursor: pointer
-  }
+}
   
-  .btn--disable{
-    opacity: .65;
-    pointer-events: none;
-    color:#514E4E;
-  }
+.card__button:hover{
+  box-shadow: 0px 4px 10px 0px rgba(29, 0, 10, 0.2),
+      0px 2px 3px 0px rgba(29, 0, 10, 0.2);
+    cursor: pointer
+}
+.card__submit-button{
+  width: 20%;
+  margin-left:20px;
+  margin-bottom:5px;
+  font-size: clamp(0.725rem, 2.5vw, 0.9rem);
+  background-color: #b8acac;
+  border-radius: 5px;
+  padding:0.55rem;
+  border:0px solid;
+}
+
+.card__submit-button:hover{
+  box-shadow: 0px 4px 10px 0px rgba(29, 0, 10, 0.2),
+  0px 2px 3px 0px rgba(29, 0, 10, 0.2);
+  cursor: pointer
+}
+  
+.btn--disable{
+  opacity: .65;
+  pointer-events: none;
+  color:#514E4E;
+}

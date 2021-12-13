@@ -65,7 +65,7 @@
 .form-container__input{
     background-color: #f5f3f3;
     margin-top: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border-radius: 0.25rem;
     padding: 8.5px;
     border: 1px solid black;
@@ -79,10 +79,6 @@
 
 .form-container__input:focus{
     outline: none;
-}
-
-.form-container__input-radio{
-    margin-top: 15px;
 }
 
 .form-container__button{
