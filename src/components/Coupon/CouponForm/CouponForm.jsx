@@ -24,15 +24,6 @@ export const CouponForm = () => {
     ) {
       errors.minCartValue = "Value must be more than coupon value";
     }
-    if (new Date(values.couponStartDate).getTime() < new Date().getTime()) {
-      errors.couponStartDate = "Start date/time must be in future";
-    }
-    if (
-      values.couponExpiryDate <= values.couponStartDate &&
-      values.couponExpiryDate !== ""
-    ) {
-      errors.couponExpiryDate = "Expiry must be greater than state date/time";
-    }
     return errors;
   }; // end of validate
 

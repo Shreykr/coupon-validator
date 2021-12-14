@@ -1,7 +1,6 @@
 .card__body {
   display: flex;
-  flex-flow: column nowrap;
-  height: fit-content;
+  flex-flow: column nowrap; 
   border-radius: 0.75rem;
   padding: 1rem;
   background-color: #e9dfdf;
