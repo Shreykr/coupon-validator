@@ -1,70 +1,64 @@
-# Getting Started with Create React App
+# Coupon Validator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An web app to create and validate coupon codes
 
-## Available Scripts
+# Table of Contents
 
-In the project directory, you can run:
+- [Technologies Used](#tused)
+- [Getting Started](#started)
+- [Pre-requisites](#require)
+- [Installation](#installation)
+- [Screenshot](#screenshot)
+- [Hosted web application](#hosted-app)
 
-### `npm start`
+## Technologies Used<a name="tused"></a>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- React
+- Formik
+- Yup
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Getting Started<a name="started"></a>
 
-### `npm test`
+To install and run this app locally simply follow the instructions below:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Pre-requisites<a name="require"></a>
 
-### `npm run build`
+You need to have or install the following:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Git bash
+2. Npm
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Installation<a name="installation"></a>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Clone repo
+  ```
+  git clone https://github.com/Shreykr/coupon-validator.git
+  ```
+- Navigate to project folder
+- Run installation
+  ```
+  npm install
+  ```
+- Create a `.env` file with this template at the root of your project
 
-### `npm run eject`
+  ```
+  REACT_APP_API_URL =  http://localhost:5000/api/v1
+  ```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Start app
+  ```
+  npm run start
+  ```
+  -You can now create coupons and apply them on a cart value to test its validity.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Screenshot
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![](./screenshot.png)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#### Hosted web application<a name="hosted-app"></a>
 
-## Learn More
+https://coupon-validator-app.netlify.app/
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Author
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Shreyas K R
