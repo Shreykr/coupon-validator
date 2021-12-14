@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Toast } from "../../core/Toast/Toast";
 
-export function couponService(type, operation = undefined, data = {}) {
+export function couponService(type, operation, data = {}) {
   const getCoupon = (operation) => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/coupon/get-coupons`)
