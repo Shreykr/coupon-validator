@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import { ToastContainer } from "react-toastify";
 import { Toast } from "../../core/Toast/Toast";
-
 import Nav from "./Nav/Nav";
 import Card from "./Card/Card";
-
 import "react-toastify/dist/ReactToastify.css";
 import "./checkout.css";
 
 import { couponService } from "../../services/http/Coupon";
 
 function Checkout() {
+  // state variables
   let [cartValue, setCartValue] = useState(0);
   let [coupon, setCoupon] = useState(null);
   let [status, setStatus] = useState(false);
@@ -20,30 +19,45 @@ function Checkout() {
   let [visibilityState, setVisibilityState] = useState(false);
   let [fieldState, setFieldState] = useState(false);
 
+  // ref variables
+  let cartInput = useRef(null);
+
+  // Get coupon details on component load
   useEffect(() => {
     couponService("get-coupons", setCoupon);
   }, []);
 
-  let cartInput = useRef(null);
+  // Update cart value on input change
+  let updateCartValue = (e) => {
+    if (cartInput.current.value < 50 || cartInput.current.value > 5000) {
+      setCartValue(0);
+    } else {
+      e.preventDefault();
+      cartInput.current.value === ""
+        ? setCartValue(0)
+        : setCartValue(Number(cartInput.current.value));
+    }
+  }; // end of updateCartValue
 
-  let resetCartValue = (e) => {
-    e.preventDefault();
-    setCartValue(0);
-    setFieldState(false);
-    setButtonState((buttonState = false));
-    setVisibilityState((visibilityState = false));
-    cartInput.current.value = "";
-  };
-
-  let executeFunctions = (coupon) => {
-    navToggle();
-    validateCoupon(coupon);
-  };
-
+  // Toggle sidenav
   let navToggle = () => {
     setStatus((status = !status));
     status ? setNavOpen((navState = "nav--open")) : setNavOpen((navState = ""));
-  };
+  }; // end of navToggle
+
+  // Select coupon value appearance
+  let couponValue = (coupon) =>
+    coupon.couponType === "Flat Discount" ? (
+      <span>₹{coupon.couponValue}/-</span>
+    ) : (
+      <span>{coupon.couponValue}% off</span>
+    ); // end of couponValue
+
+  // Toggle sidenav and initiate validation
+  let executeFunctions = (coupon) => {
+    navToggle();
+    validateCoupon(coupon);
+  }; //end of executeFunctions
 
   let validateCoupon = (coupon) => {
     if (coupon.couponExpiryDate <= new Date().getTime()) {
@@ -53,8 +67,9 @@ function Checkout() {
     } else {
       updateCart(coupon);
     }
-  };
+  }; // end of validateCoupon
 
+  // Calculate discount value and update cart value
   let updateCart = (coupon) => {
     if (coupon.couponType === "Flat Discount") {
       setCartValue(cartValue - coupon.couponValue);
@@ -73,25 +88,17 @@ function Checkout() {
     setFieldState(true);
     setVisibilityState(true);
     Toast("success", "Valid Coupon - Discount applied");
-  };
+  }; // end of updateCart
 
-  let updateCartValue = (e) => {
-    if (cartInput.current.value < 50 || cartInput.current.value > 5000) {
-      setCartValue(0);
-    } else {
-      e.preventDefault();
-      cartInput.current.value === ""
-        ? setCartValue(0)
-        : setCartValue(Number(cartInput.current.value));
-    }
-  };
-
-  let couponValue = (coupon) =>
-    coupon.couponType === "Flat Discount" ? (
-      <span>₹{coupon.couponValue}/-</span>
-    ) : (
-      <span>{coupon.couponValue}% off</span>
-    );
+  // Reset cart value
+  let resetCartValue = (e) => {
+    e.preventDefault();
+    setCartValue(0);
+    setFieldState(false);
+    setButtonState((buttonState = false));
+    setVisibilityState((visibilityState = false));
+    cartInput.current.value = "";
+  }; //end of resetCartValue
 
   return (
     <>

@@ -1,9 +1,8 @@
-import "./card.css";
 import React from "react";
 import { Link } from "react-router-dom";
-
 import Input from "../../../core/Input/Input";
 import Button from "../../../core/Button/Button";
+import "./card.css";
 
 const Card = React.forwardRef((props, ref) => {
   return (

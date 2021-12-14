@@ -8,7 +8,6 @@ function Coupon() {
       <section className='coupon-form-container'>
         <CouponForm />
       </section>
-
       <ToastContainer
         theme='dark'
         position='bottom-center'

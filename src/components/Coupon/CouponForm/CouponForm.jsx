@@ -1,13 +1,12 @@
-import { Formik, Field, Form, ErrorMessage } from "formik";
 import { Link } from "react-router-dom";
+import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-
 import Button from "../../../core/Button/Button";
+import { couponService } from "../../../services/http/Coupon";
 import "./coupon-form.css";
 
-import { couponService } from "../../../services/http/Coupon";
-
 export const CouponForm = () => {
+  // Validate input field values
   const validate = (values) => {
     const errors = {};
     if (
@@ -35,7 +34,7 @@ export const CouponForm = () => {
       errors.couponExpiryDate = "Expiry must be greater than state date/time";
     }
     return errors;
-  };
+  }; // end of validate
 
   return (
     <Formik
@@ -88,7 +87,7 @@ export const CouponForm = () => {
         couponService("add-coupon", undefined, data);
         setSubmitting(false);
       }}>
-      {(formik) => (
+      {({ errors, values, isValid, dirty, isSubmitting }) => (
         <div className='form-container'>
           <Form className='form-container__form'>
             <div className='form-header'>
@@ -104,7 +103,6 @@ export const CouponForm = () => {
                 placeholder='Enter Coupon Code'
                 id='couponCode'
                 className='form-container__input'
-                onChange={formik.handleChange}
               />
               <div className='form__group--error'>
                 <ErrorMessage name='couponCode' />
@@ -120,7 +118,7 @@ export const CouponForm = () => {
                     defaultValue='Flat Discount'
                     id='couponType'
                     className='form-container__input-radio'
-                    checked={formik.values.couponType === "Flat Discount"}
+                    checked={values.couponType === "Flat Discount"}
                   />
                   <span className='form-container__radio-value'>
                     Flat Discount
@@ -133,7 +131,7 @@ export const CouponForm = () => {
                     defaultValue='Percentage Discount'
                     className='form-container__input-radio'
                     style={{ marginBottom: "5.5px" }}
-                    checked={formik.values.couponType === "Percentage Discount"}
+                    checked={values.couponType === "Percentage Discount"}
                   />
                   <span className='form-container__radio-value'>
                     Percentage Discount
@@ -155,11 +153,11 @@ export const CouponForm = () => {
                 id='couponValue'
                 className={
                   "form-container__input " +
-                  (formik.values.couponType
+                  (values.couponType
                     ? "form__group--enabled"
                     : "form__group--disabled")
                 }
-                disabled={formik.values.couponType === ""}
+                disabled={values.couponType === ""}
               />
               <div className='form__group--error'>
                 <ErrorMessage name='couponValue' />
@@ -178,17 +176,17 @@ export const CouponForm = () => {
                 placeholder='Enter Max. Discount Amount'
                 className={
                   "form-container__input " +
-                  (formik.values.couponType &&
-                  formik.values.couponType === "Percentage Discount" &&
-                  !formik.errors.couponValue
+                  (values.couponType &&
+                  values.couponType === "Percentage Discount" &&
+                  !errors.couponValue
                     ? "form__group--enabled"
                     : "form__group--disabled")
                 }
                 disabled={
-                  formik.errors.couponValue !== undefined ||
-                  formik.errors.couponValue === "" ||
-                  formik.values.couponType === "" ||
-                  formik.values.couponType === "Flat Discount"
+                  errors.couponValue !== undefined ||
+                  errors.couponValue === "" ||
+                  values.couponType === "" ||
+                  values.couponType === "Flat Discount"
                 }
               />
               <div className='form__group--error'>
@@ -206,13 +204,11 @@ export const CouponForm = () => {
                 placeholder='Enter Min. Cart Amount'
                 className={
                   "form-container__input " +
-                  (formik.values.couponType && !formik.errors.couponValue
+                  (values.couponType && !errors.couponValue
                     ? "form__group--enabled"
                     : "form__group--disabled")
                 }
-                disabled={
-                  formik.values.couponType === "" || formik.errors.couponValue
-                }
+                disabled={values.couponType === "" || errors.couponValue}
               />
               <div className='form__group--error'>
                 <ErrorMessage name='minCartValue' />
@@ -246,14 +242,14 @@ export const CouponForm = () => {
                 id='couponExpiryDate'
                 className={
                   "form-container__input " +
-                  (formik.values.couponStartDate === "" ||
-                  formik.errors.couponStartDate !== undefined
+                  (values.couponStartDate === "" ||
+                  errors.couponStartDate !== undefined
                     ? "form__group--disabled"
                     : "form__group--enabled")
                 }
                 disabled={
-                  formik.values.couponStartDate === "" ||
-                  formik.errors.couponStartDate !== undefined
+                  values.couponStartDate === "" ||
+                  errors.couponStartDate !== undefined
                 }
               />
               <div className='form__group--error'>
@@ -264,7 +260,7 @@ export const CouponForm = () => {
               title='Create Button'
               type='submit'
               className='form-container__button'
-              disabled={!formik.isValid || !formik.dirty || formik.isSubmitting}
+              disabled={!isValid || !dirty || isSubmitting}
               value='Create'
             />
             <Link

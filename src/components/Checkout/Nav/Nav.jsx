@@ -1,8 +1,9 @@
-import "./nav.css";
 import Button from "../../../core/Button/Button";
+import "./nav.css";
 
 function Nav(props) {
   let coupons = [];
+  // Generating coupon list on sidenav
   if (props.coupon !== null) {
     coupons = props.coupon.map((coupon, i) => {
       return (
