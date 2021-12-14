@@ -28,7 +28,6 @@ export const CouponForm = () => {
     if (new Date(values.couponStartDate).getTime() < new Date().getTime()) {
       errors.couponStartDate = "Start date/time must be in future";
     }
-
     if (
       values.couponExpiryDate <= values.couponStartDate &&
       values.couponExpiryDate !== ""
@@ -58,7 +57,7 @@ export const CouponForm = () => {
         couponValue: Yup.number()
           .required("Coupon Value is required")
           .min(1, "Must be at least 1")
-          .max(5000, "Must be at most than 5000"),
+          .max(5000, "Must be at most 5000"),
         couponType: Yup.string()
           .oneOf(
             ["Flat Discount", "Percentage Discount"],

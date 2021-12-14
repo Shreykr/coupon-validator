@@ -80,21 +80,18 @@ function Checkout() {
       setCartValue(0);
     } else {
       e.preventDefault();
-      if (cartInput.current.value === "") {
-        setCartValue(0);
-      } else {
-        setCartValue(Number(cartInput.current.value));
-      }
+      cartInput.current.value === ""
+        ? setCartValue(0)
+        : setCartValue(Number(cartInput.current.value));
     }
   };
 
-  let couponValue = (coupon) => {
-    if (coupon.couponType === "Flat Discount") {
-      return <span>₹{coupon.couponValue}/-</span>;
-    } else {
-      return <span>{coupon.couponValue}% off</span>;
-    }
-  };
+  let couponValue = (coupon) =>
+    coupon.couponType === "Flat Discount" ? (
+      <span>₹{coupon.couponValue}/-</span>
+    ) : (
+      <span>{coupon.couponValue}% off</span>
+    );
 
   return (
     <>
