@@ -1,8 +1,6 @@
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import "./coupon.css";
-
 import { CouponForm } from "./CouponForm/CouponForm";
+import "./coupon.css";
 
 function Coupon() {
   return (

@@ -33,7 +33,7 @@ export const CouponForm = () => {
       values.couponExpiryDate <= values.couponStartDate &&
       values.couponExpiryDate !== ""
     ) {
-      errors.couponExpiryDate = "Expiry date must be greater than state date";
+      errors.couponExpiryDate = "Expiry must be greater than state date/time";
     }
     return errors;
   };
