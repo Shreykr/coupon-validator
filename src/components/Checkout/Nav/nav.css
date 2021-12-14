@@ -91,27 +91,6 @@
   font-size: clamp(0.75rem, 2vw, 1rem);
   margin-bottom:25px;
 }
-  
-.nav__button{
-  width: 50%;
-  align-self: center;
-  margin-bottom:clamp(20px, 3.5vw,30px);
-  font-size: clamp(0.75rem, 2vw, 1.1rem);
-  background-color: #b8acac;
-  border-radius: 5px;
-  padding:0.45rem;
-  border:0px solid;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  cursor: pointer;
-}
-  
-.nav__button:hover{
-  box-shadow: 0px 4px 10px 0px rgba(29, 0, 10, 0.2),
-      0px 2px 3px 0px rgba(29, 0, 10, 0.2);
-}
 
 @media screen and (max-width: 768px) {
   .nav__collapse {

@@ -61,25 +61,6 @@
     outline: none;
 }
 
-.form-container__button{
-    width: 80%;
-    align-self: center;
-    margin-top:clamp(10px, 3.5vw,15px);
-    margin-bottom:clamp(10px, 3.5vw,15px);
-    font-size: clamp(0.95rem, 2.5vw, 1.2rem);
-    background-color: #b8acac;
-    border-radius: 5px;
-    padding:0.55rem;
-    border:0px solid; 
-    text-align: center;
-}
-
-.form-container__button:hover{
-    box-shadow: 0px 4px 10px 0px rgba(29, 0, 10, 0.2),
-    0px 2px 3px 0px rgba(29, 0, 10, 0.2);
-    cursor: pointer
-}
-
 .form__group--error{
     color:red;
     font-size:12.5px;

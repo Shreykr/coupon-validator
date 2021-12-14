@@ -2,6 +2,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 
+import Button from "../../../core/Button/Button";
 import "./coupon-form.css";
 
 import { couponService } from "../../../services/http/Coupon";
@@ -260,15 +261,13 @@ export const CouponForm = () => {
                 <ErrorMessage name='couponExpiryDate' />
               </div>
             </div>
-            <button
+            <Button
               title='Create Button'
               type='submit'
               className='form-container__button'
-              disabled={
-                !formik.isValid || !formik.dirty || formik.isSubmitting
-              }>
-              Create
-            </button>
+              disabled={!formik.isValid || !formik.dirty || formik.isSubmitting}
+              value='Create'
+            />
             <Link
               to='../checkout'
               className='form-container__button'

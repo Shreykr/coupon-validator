@@ -1,4 +1,5 @@
 import "./nav.css";
+import Button from "../../../core/Button/Button";
 
 function Nav(props) {
   let coupons = [];
@@ -18,12 +19,12 @@ function Nav(props) {
               Max.Discount Amount: <span>₹{coupon.maxDiscountAmount}/- </span>
             </div>
           </div>
-          <button
+          <Button
             title='Apply Coupon'
             className='nav__button'
-            onClick={() => props.executeFunctions(coupon)}>
-            Apply Coupon
-          </button>
+            onClick={() => props.executeFunctions(coupon)}
+            value='Apply Coupon'
+          />
         </div>
       );
     });
