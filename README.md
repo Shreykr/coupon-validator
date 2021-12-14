@@ -49,7 +49,7 @@ You need to have or install the following:
   ```
   npm run start
   ```
-  -You can now create coupons and apply them on a cart value to test its validity.
+- You can now create coupons and apply them on a cart value to test its validity.
 
 #### Screenshot
 
