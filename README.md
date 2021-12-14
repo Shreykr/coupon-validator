@@ -1,6 +1,6 @@
 # Coupon Validator
 
-An web app to create and validate coupon codes
+A web app to create and validate coupon codes
 
 # Table of Contents
 
