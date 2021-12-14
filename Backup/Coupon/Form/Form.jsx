@@ -75,7 +75,7 @@ export const Forms = () => {
       })}
       onSubmit={async (values, { setSubmitting }) => {
         let data = {
-          couponCode: values.couponCode,
+          couponCode: values.couponCode.trim(),
           couponValue: values.couponValue,
           couponType: values.couponType,
           maxDiscountAmount: values.maxDiscount,

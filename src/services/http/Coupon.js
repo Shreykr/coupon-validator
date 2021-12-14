@@ -18,7 +18,6 @@ export function couponService(type, operation = undefined, data = {}) {
   };
 
   const addCoupon = (data) => {
-    console.log(data);
     axios
       .post(`${process.env.REACT_APP_API_URL}/coupon/add-coupon`, data)
       .then(function (response) {
@@ -26,12 +25,15 @@ export function couponService(type, operation = undefined, data = {}) {
           Toast("success", "Coupon Created 😄");
         } else if (response.data.status === 400) {
           Toast("error", "Failed to create coupon 😥");
+        } else if (response.data.status === 403) {
+          Toast("error", response.data.message);
         }
       })
       .catch(function (error) {
         Toast("error", "Some Error Occurred 😥");
       });
   };
+
   if (type === "get-coupons") {
     return getCoupon(operation);
   }

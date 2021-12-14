@@ -1,0 +1,19 @@
+.form__group--error{
+    color:red;
+    font-size:12.5px;
+    margin-bottom:10px;
+}
+
+.form__group--disabled{
+    background-color: #B8ACAC;
+    color: #857D7D;
+}
+
+.form__group--enabled{
+    background-color: #F5F3F3;
+    color: #000000;
+}
+
+.form-container__input-radio{
+    margin-top: 15px;
+}
