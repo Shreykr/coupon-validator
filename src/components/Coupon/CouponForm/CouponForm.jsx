@@ -22,7 +22,10 @@ export const CouponForm = () => {
       values.couponType === "Flat Discount" &&
       values.minCartValue !== ""
     ) {
-      errors.minCartValue = "Value must be more than coupon value";
+      if (values.couponValue < 5000)
+        errors.minCartValue = "Value must be more than coupon value";
+      else if (values.couponValue === 5000)
+        errors.minCartValue = "Value must be equal to coupon value";
     }
     if (
       values.couponExpiryDate <= values.couponStartDate &&
@@ -30,6 +33,14 @@ export const CouponForm = () => {
     ) {
       errors.couponExpiryDate = "Expiry must be greater than state date/time";
     }
+    if (
+      values.couponValue < 1 ||
+      values.couponValue > 5000 ||
+      values.couponValue === ""
+    ) {
+      values.minCartValue = 0;
+    }
+
     return errors;
   }; // end of validate
 
